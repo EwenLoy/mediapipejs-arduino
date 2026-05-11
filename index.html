@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Роборука - MediaPipe + Arduino (Offline)</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Левая панель - Видео -->
+        <div class="left-panel">
+            <div class="header">
+                <h1>📹 Предпросмотр</h1>
+                <button id="cameraBtn" class="btn btn-primary" onclick="toggleCamera()">
+                    🎥 Включить камеру
+                </button>
+            </div>
+            <div class="video-container">
+                <video id="videoElement" autoplay playsinline></video>
+                <canvas id="canvasElement"></canvas>
+                <div class="fps-counter" id="fpsCounter">FPS: 0</div>
+            </div>
+        </div>
+
+        <!-- Правая панель - Управление -->
+        <div class="right-panel">
+            <h2>⚙️ Управление</h2>
+
+            <!-- Подключение Arduino -->
+            <div class="section">
+                <h3>🔌 Arduino</h3>
+                <button id="connectBtn" class="btn btn-primary" onclick="connectSerial()">
+                    Подключить Arduino
+                </button>
+                <div id="serialStatus" class="status status-error">Не подключено</div>
+                <div id="serialWarning" class="info-box" style="display: none;">
+                    ⚠️ <strong>Требуется Chrome/Edge 89+</strong><br>
+                    Web Serial API работает только в Chromium браузерах
+                </div>
+            </div>
+
+            <!-- Выбор руки -->
+            <div class="section">
+                <h3>✋ Выбор руки</h3>
+                <div class="hand-selector">
+                    <label>
+                        <input type="radio" name="hand" value="Left" checked onchange="changeHand()">
+                        Левая
+                    </label>
+                    <label>
+                        <input type="radio" name="hand" value="Right" onchange="changeHand()">
+                        Правая
+                    </label>
+                </div>
+                <div id="handStatus" class="status status-warning">Нет</div>
+            </div>
+
+            <!-- Текущие углы -->
+            <div class="section">
+                <h3> Текущие углы</h3>
+                <div class="angles-display">
+                    <div class="angle-item">
+                        <span>👍 Большой</span>
+                        <span class="angle-value" id="angle0">90°</span>
+                    </div>
+                    <div class="angle-item">
+                        <span>☝️ Указательный</span>
+                        <span class="angle-value" id="angle1">90°</span>
+                    </div>
+                    <div class="angle-item">
+                        <span>🖕 Средний</span>
+                        <span class="angle-value" id="angle2">90°</span>
+                    </div>
+                    <div class="angle-item">
+                        <span>💍 Безымянный</span>
+                        <span class="angle-value" id="angle3">90°</span>
+                    </div>
+                    <div class="angle-item">
+                        <span>🤙 Мизинец</span>
+                        <span class="angle-value" id="angle4">90°</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Передача данных -->
+            <div class="section">
+                <h3>📡 Передача</h3>
+                <div class="baud-selector">
+                    <label for="baudRate">Baud Rate:</label>
+                    <select id="baudRate">
+                        <option value="9600">9600</option>
+                        <option value="57600">57600</option>
+                        <option value="115200" selected>115200</option>
+                        <option value="230400">230400</option>
+                    </select>
+                </div>
+                <button id="transmitBtn" class="btn btn-warning" onclick="toggleTransmit()" disabled>
+                    ▶ Включить передачу
+                </button>
+            </div>
+
+            <!-- Окно логов -->
+            <div class="section">
+                <h3>📋 Логи</h3>
+                <div class="log-window" id="logWindow"></div>
+                <button class="btn btn-primary" onclick="clearLogs()" style="margin-top: 10px; width: 100%;">
+                    🗑️ Очистить логи
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты MediaPipe (Локальные) -->
+    <script src="js/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="js/hands.js" crossorigin="anonymous"></script>
+    
+    <!-- Основной скрипт приложения -->
+    <script src="js/app.js"></script>
+</body>
+</html>
