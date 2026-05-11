@@ -192,35 +192,3 @@ const int calibrations[5] = {0, 0, 0, 0, 0};
 servos[i].write(angles[i] + calibrations[i]);
 ```
 
-## 📈 Производительность
-
-- **Задержка:** ~50-100мс от движения до реакции сервопривода
-- **FPS:** 25-30 fps на среднем ноутбуке
-- **Точность:** ±5° для углов сгибания
-- **Стабильность:** Работает несколько часов без перезагрузки
-
-## 🤝 Вклад в проект
-
-1. Fork проекта
-2. Создайте ветку (`git checkout -b feature/AmazingFeature`)
-3. Commit изменения (`git commit -m 'Add some AmazingFeature'`)
-4. Push в ветку (`git push origin feature/AmazingFeature`)
-5. Откройте Pull Request
-
-## 📄 Лицензия
-
-Этот проект лицензирован под MIT License - см. файл `LICENSE` для деталей.
-
-## 🙏 Благодарности
-
-- [MediaPipe](https://mediapipe.dev/) - за библиотеку компьютерного зрения
-- [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) - за возможность подключения Arduino из браузера
-- [Arduino](https://www.arduino.cc/) - за платформу для прототипирования
-
-## 📞 Контакты
-
-Если у вас есть вопросы или предложения, создайте Issue в репозитории.
-
----
-
-**⭐ Если проект вам понравился, поставьте звезду!**
